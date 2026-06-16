@@ -1,0 +1,494 @@
+{
+  "info": {
+    "name": "Mobile Banking AI API",
+    "description": "Flutter Flask Banking Backend Test Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5000/api"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "user_id",
+      "value": "1"
+    }
+  ],
+
+  "item": [
+
+    {
+      "name": "AUTH",
+
+      "item": [
+
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n \"name\":\"John Doe\",\n \"email\":\"john@test.com\",\n \"password\":\"123456\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/register"
+            }
+          }
+        },
+
+
+        {
+          "name": "Login",
+
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.environment.set('token', pm.response.json().token);"
+                ]
+              }
+            }
+          ],
+
+          "request": {
+            "method": "POST",
+
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+
+            "body": {
+              "mode":"raw",
+              "raw":"{\n \"email\":\"john@test.com\",\n \"password\":\"123456\"\n}"
+            },
+
+            "url":{
+              "raw":"{{base_url}}/auth/login"
+            }
+          }
+        }
+
+      ]
+    },
+
+
+    {
+      "name":"USER PROFILE",
+
+      "item":[
+
+        {
+          "name":"Get Profile",
+
+          "request":{
+
+            "method":"GET",
+
+            "header":[
+              {
+                "key":"Authorization",
+                "value":"Bearer {{token}}"
+              }
+            ],
+
+            "url":{
+              "raw":"{{base_url}}/users/me"
+            }
+          }
+        },
+
+
+        {
+          "name":"Update Profile",
+
+          "request":{
+
+            "method":"PUT",
+
+            "header":[
+              {
+                "key":"Authorization",
+                "value":"Bearer {{token}}"
+              },
+              {
+                "key":"Content-Type",
+                "value":"application/json"
+              }
+            ],
+
+            "body":{
+              "mode":"raw",
+              "raw":"{\n \"name\":\"John Updated\"\n}"
+            },
+
+            "url":{
+              "raw":"{{base_url}}/users/me"
+            }
+
+          }
+        }
+
+      ]
+    },
+
+
+
+    {
+      "name":"ACCOUNT",
+
+      "item":[
+
+
+        {
+          "name":"Get Balance",
+
+          "request":{
+
+            "method":"GET",
+
+            "header":[
+              {
+                "key":"Authorization",
+                "value":"Bearer {{token}}"
+              }
+            ],
+
+            "url":{
+              "raw":"{{base_url}}/accounts"
+            }
+          }
+        },
+
+
+
+        {
+          "name":"Deposit",
+
+          "request":{
+
+            "method":"POST",
+
+            "header":[
+              {
+                "key":"Authorization",
+                "value":"Bearer {{token}}"
+              },
+              {
+                "key":"Content-Type",
+                "value":"application/json"
+              }
+            ],
+
+            "body":{
+              "mode":"raw",
+              "raw":"{\n \"amount\":5000\n}"
+            },
+
+            "url":{
+              "raw":"{{base_url}}/accounts/deposit"
+            }
+          }
+        },
+
+
+
+        {
+          "name":"Withdraw",
+
+          "request":{
+
+            "method":"POST",
+
+            "header":[
+              {
+                "key":"Authorization",
+                "value":"Bearer {{token}}"
+              },
+              {
+                "key":"Content-Type",
+                "value":"application/json"
+              }
+            ],
+
+            "body":{
+              "mode":"raw",
+              "raw":"{\n \"amount\":1000\n}"
+            },
+
+            "url":{
+              "raw":"{{base_url}}/accounts/withdraw"
+            }
+
+          }
+        },
+
+
+
+        {
+          "name":"Transfer",
+
+          "request":{
+
+            "method":"POST",
+
+            "header":[
+              {
+                "key":"Authorization",
+                "value":"Bearer {{token}}"
+              },
+              {
+                "key":"Content-Type",
+                "value":"application/json"
+              }
+            ],
+
+            "body":{
+              "mode":"raw",
+              "raw":"{\n \"receiver_id\":2,\n \"amount\":500\n}"
+            },
+
+            "url":{
+              "raw":"{{base_url}}/accounts/transfer"
+            }
+          }
+        }
+
+
+      ]
+
+    },
+
+
+
+    {
+      "name":"TRANSACTIONS",
+
+      "item":[
+
+
+        {
+          "name":"Create Transaction",
+
+          "request":{
+
+            "method":"POST",
+
+            "header":[
+              {
+                "key":"Authorization",
+                "value":"Bearer {{token}}"
+              },
+              {
+                "key":"Content-Type",
+                "value":"application/json"
+              }
+            ],
+
+            "body":{
+              "mode":"raw",
+              "raw":"{\n \"type\":\"expense\",\n \"category\":\"Food\",\n \"amount\":50,\n \"description\":\"Lunch\"\n}"
+            },
+
+            "url":{
+              "raw":"{{base_url}}/transactions"
+            }
+          }
+        },
+
+
+        {
+          "name":"List Transactions",
+
+          "request":{
+
+            "method":"GET",
+
+            "header":[
+              {
+                "key":"Authorization",
+                "value":"Bearer {{token}}"
+              }
+            ],
+
+            "url":{
+              "raw":"{{base_url}}/transactions"
+            }
+          }
+        },
+
+
+        {
+          "name":"Get Transaction",
+
+          "request":{
+
+            "method":"GET",
+
+            "header":[
+              {
+                "key":"Authorization",
+                "value":"Bearer {{token}}"
+              }
+            ],
+
+            "url":{
+              "raw":"{{base_url}}/transactions/1"
+            }
+          }
+        },
+
+
+        {
+          "name":"Delete Transaction",
+
+          "request":{
+
+            "method":"DELETE",
+
+            "header":[
+              {
+                "key":"Authorization",
+                "value":"Bearer {{token}}"
+              }
+            ],
+
+            "url":{
+              "raw":"{{base_url}}/transactions/1"
+            }
+          }
+        }
+
+      ]
+
+    },
+
+
+
+    {
+      "name":"SAVINGS",
+
+      "item":[
+
+
+        {
+          "name":"Create Goal",
+
+          "request":{
+
+            "method":"POST",
+
+            "header":[
+              {
+                "key":"Authorization",
+                "value":"Bearer {{token}}"
+              },
+              {
+                "key":"Content-Type",
+                "value":"application/json"
+              }
+            ],
+
+            "body":{
+              "mode":"raw",
+              "raw":"{\n \"title\":\"New Laptop\",\n \"target\":2000,\n \"deadline\":\"2026-12-30\"\n}"
+            },
+
+            "url":{
+              "raw":"{{base_url}}/savings"
+            }
+          }
+        },
+
+
+        {
+          "name":"List Goals",
+
+          "request":{
+
+            "method":"GET",
+
+            "header":[
+              {
+                "key":"Authorization",
+                "value":"Bearer {{token}}"
+              }
+            ],
+
+            "url":{
+              "raw":"{{base_url}}/savings"
+            }
+          }
+        },
+
+
+        {
+          "name":"Add Saving",
+
+          "request":{
+
+            "method":"PUT",
+
+            "header":[
+              {
+                "key":"Authorization",
+                "value":"Bearer {{token}}"
+              },
+              {
+                "key":"Content-Type",
+                "value":"application/json"
+              }
+            ],
+
+            "body":{
+              "mode":"raw",
+              "raw":"{\n \"amount\":200\n}"
+            },
+
+            "url":{
+              "raw":"{{base_url}}/savings/1"
+            }
+          }
+        },
+
+
+        {
+          "name":"Delete Goal",
+
+          "request":{
+
+            "method":"DELETE",
+
+            "header":[
+              {
+                "key":"Authorization",
+                "value":"Bearer {{token}}"
+              }
+            ],
+
+            "url":{
+              "raw":"{{base_url}}/savings/1"
+            }
+          }
+        }
+
+      ]
+
+    }
+
+  ]
+}
