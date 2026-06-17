@@ -37,6 +37,8 @@ def update_profile():
 
     if "name" in data:
         user.name=data["name"]
+    if "email" in data:
+        user.email=data["email"]
     db.session.commit()
 
     return {

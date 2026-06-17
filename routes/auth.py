@@ -20,31 +20,20 @@ auth=Blueprint(
 
 @auth.post("/register")
 def register():
-
-
     data=request.json
-
-
     if not data.get("email") or not data.get("password"):
-
         return {
             "message":"Invalid input"
         },400
-
-
 
     exists=User.query.filter_by(
         email=data["email"]
     ).first()
 
-
     if exists:
-
         return {
         "message":"Email exists"
         },400
-
-
 
     password=bcrypt.hashpw(
         data["password"].encode(),
@@ -56,9 +45,7 @@ def register():
         email=data["email"],
         password=password.decode()
     )
-
     db.session.add(user)
-
     db.session.commit()
 
     account=Account(
@@ -68,7 +55,6 @@ def register():
     )
 
     db.session.add(account)
-
     db.session.commit()
 
 
@@ -83,38 +69,23 @@ def register():
 
 @auth.post("/login")
 def login():
-
-
     data=request.json
-
-
     user=User.query.filter_by(
         email=data["email"]
     ).first()
-
 
     if not user:
 
         return {"message":"Invalid"},401
 
-
-
     if bcrypt.checkpw(
         data["password"].encode(),
         user.password.encode()
     ):
-
-
-        token=create_access_token(
-            identity=user.id
-        )
-
-
+        token=create_access_token(identity=str(user.id))
         return {
             "token":token
         }
-
-
 
     return {
         "message":"Invalid"

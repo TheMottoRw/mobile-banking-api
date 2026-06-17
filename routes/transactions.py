@@ -67,6 +67,7 @@ def list_transactions():
     return [
 
     {
+    "id":x.id,
     "category":x.category,
     "amount":x.amount,
     "type":x.type

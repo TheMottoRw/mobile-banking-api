@@ -117,6 +117,10 @@ def transfer():
     receiver_account=Account.query.filter_by(
         user_id=receiver
     ).first()
+    if not receiver_account:
+        return {
+            "message":"Invalid receiver"
+        },400
 
     if sender_account.balance < amount:
         return {

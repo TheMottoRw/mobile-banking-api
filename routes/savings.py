@@ -21,7 +21,8 @@ def create_goal():
     goal=Savings(
         user_id=user,
         title=data["title"],
-        target_amount=data["target"]
+        target_amount=data["target"],
+        deadline=data["deadline"],
     )
     db.session.add(goal)
     db.session.commit()

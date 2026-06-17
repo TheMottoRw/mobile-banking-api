@@ -22,4 +22,4 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS=False
 
 
-    JWT_SECRET_KEY="super-secret-key"
+    JWT_SECRET_KEY="a9f83jd72ksh29dk39slx92kdk39sld82jdksl30"
