@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from extensions import db
 
 
@@ -29,4 +31,9 @@ class Savings(db.Model):
 
     deadline=db.Column(
         db.String(20)
+    )
+
+    created_at = db.Column(
+        db.DateTime,
+        default=datetime.now()
     )
