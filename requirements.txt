@@ -14,7 +14,7 @@ itsdangerous==2.2.0
 Jinja2==3.1.6
 MarkupSafe==3.0.3
 marshmallow==4.3.0
-PyJWT==2.13.0
+PyJWT==2.15.0
 python-dotenv==1.2.2
 SQLAlchemy==2.0.51
 typing_extensions==4.15.0
